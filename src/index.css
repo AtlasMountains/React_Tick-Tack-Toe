@@ -22,15 +22,15 @@ ul {
   background: #fff;
   border: 1px solid #999;
   float: left;
-  font-size: 24px;
+  font-size: 3em;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
+  height: 2em;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 2em;
 }
 
 .square:focus {
@@ -43,7 +43,8 @@ ul {
 
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .game-info {
@@ -62,4 +63,18 @@ ul {
   margin-inline-start: 1em;
   font-weight: bold;
   font-size: large;
+}
+
+@media screen and (min-width: 500px) {
+  .game {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .square {
+    font-size: 5em;
+    height: 3em;
+    width: 3em;
+  }
 }
