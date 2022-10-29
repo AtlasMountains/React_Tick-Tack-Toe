@@ -5,7 +5,12 @@ import reportWebVitals from "./reportWebVitals";
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button
+      onClick={props.onClick}
+      className={`square ${
+        props.winningCombo.includes(props.field) ? "won" : ""
+      }`}
+    >
       {props.value}
     </button>
   );
@@ -17,6 +22,9 @@ class Board extends React.Component {
       <Square
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
+        key={i}
+        field={i}
+        winningCombo={this.props.winningCombo}
       />
     );
   }
@@ -26,7 +34,11 @@ class Board extends React.Component {
     const rows = [];
     for (let row = 0; row < 3; row++) {
       const columns = [];
-      rows.push(<div className="board-row">{columns}</div>);
+      rows.push(
+        <div className="board-row" key={row}>
+          {columns}
+        </div>
+      );
       for (let colum = 0; colum < 3; colum++) {
         columns.push(this.renderSquare(cellCount));
         cellCount += 1;
@@ -78,7 +90,13 @@ class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const result = calculateWinner(current.squares);
+    let winner;
+    let winningCombo = [];
+    if (result) {
+      winner = result[0];
+      winningCombo = result[1];
+    }
     let moves = history.map((step, move) => {
       const desc = move
         ? "Go to move #" + move + " " + getCoordinates(step)
@@ -99,8 +117,7 @@ class Game extends React.Component {
       moves = moves.reverse();
     }
 
-    let status;
-    status = winner
+    const status = winner
       ? "Winner: " + winner
       : "Next player: " + (this.state.xIsNext ? "X" : "O");
 
@@ -110,6 +127,7 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
+            winningCombo={winningCombo}
           />
         </div>
         <div className="game-info">
@@ -160,7 +178,8 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      console.log(lines[i]);
+      return [squares[a], lines[i]];
     }
   }
   return null;

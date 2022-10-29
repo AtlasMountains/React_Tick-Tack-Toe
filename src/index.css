@@ -53,3 +53,7 @@ ul {
 .active {
   font-weight: bold;
 }
+
+.won {
+  background-color: lightgreen;
+}
