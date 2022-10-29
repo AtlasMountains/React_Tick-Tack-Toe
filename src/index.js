@@ -4,10 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 class Square extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
   render() {
     return (
-      <button className="square" onClick={() => console.log("click")}>
-        {this.props.value}
+      <button className="square" onClick={() => this.setState({ value: "x" })}>
+        {this.state.value}
       </button>
     );
   }
