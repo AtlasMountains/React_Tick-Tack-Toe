@@ -66,6 +66,7 @@ class Game extends React.Component {
       history: history.concat([
         {
           squares: squares,
+          changedCell: i,
         },
       ]),
       xIsNext: !this.state.xIsNext,
@@ -86,7 +87,9 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ? "Go to move # " + move : "Go to game start";
+      const desc = move
+        ? "Go to move #" + move + " " + getCoordinates(step)
+        : "Go to game start";
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -125,6 +128,12 @@ root.render(<Game />);
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+function getCoordinates(step) {
+  const col = step.changedCell % 3;
+  const row = Math.floor(step.changedCell / 3);
+  return `(col${col},row${row})`;
+}
 
 function calculateWinner(squares) {
   const lines = [
