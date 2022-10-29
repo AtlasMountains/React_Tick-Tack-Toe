@@ -57,3 +57,9 @@ ul {
 .won {
   background-color: lightgreen;
 }
+
+.message {
+  margin-inline-start: 1em;
+  font-weight: bold;
+  font-size: large;
+}

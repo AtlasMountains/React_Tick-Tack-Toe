@@ -49,6 +49,12 @@ class Board extends React.Component {
   }
 }
 
+function Message(props) {
+  if (props.stepNumber === 9 && props.result === null) {
+    return (<h3 className="message">The game is a draw</h3>);
+  }
+}
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -130,6 +136,9 @@ class Game extends React.Component {
             winningCombo={winningCombo}
           />
         </div>
+
+        <Message result={result} stepNumber={this.state.stepNumber}/>
+
         <div className="game-info">
           <div>{status}</div>
           <button
