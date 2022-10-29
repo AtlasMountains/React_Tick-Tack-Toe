@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import reportWebVitals from "./reportWebVitals";
 
 function Square(props) {
   return (
@@ -51,7 +50,7 @@ class Board extends React.Component {
 
 function Message(props) {
   if (props.stepNumber === 9 && props.result === null) {
-    return (<h3 className="message">The game is a draw</h3>);
+    return <h3 className="message">The game is a draw</h3>;
   }
 }
 
@@ -137,7 +136,7 @@ class Game extends React.Component {
           />
         </div>
 
-        <Message result={result} stepNumber={this.state.stepNumber}/>
+        <Message result={result} stepNumber={this.state.stepNumber} />
 
         <div className="game-info">
           <div>{status}</div>
@@ -161,11 +160,6 @@ class Game extends React.Component {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Game />);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
 
 function getCoordinates(step) {
   const col = step.changedCell % 3;
