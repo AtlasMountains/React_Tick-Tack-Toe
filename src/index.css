@@ -49,6 +49,7 @@ ul {
 
 .game-info {
   margin-left: 20px;
+  min-width: 260px;
 }
 
 .active {
